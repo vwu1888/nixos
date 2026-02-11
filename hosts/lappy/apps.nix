@@ -2,19 +2,29 @@
 
 {
   environment.systemPackages = with pkgs; [
-    wget
-    _1password-gui
     neovim
-    htop
-    fastfetch
+    vscode
+    jetbrains-toolbox
+    kicad
+    wget
 
     firefox
     discord
-
+    deezer-enhanced
     steam
+    slack
 
     libreoffice
+    inkscape
+    vlc
+    _1password-gui
+    _1password-cli
+    mullvad
+    mullvad-vpn
 
+    htop
+    btop
+    fastfetch
   ];
 
   programs.steam = {
