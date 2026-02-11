@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
 
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+    };
+
     home-manager = {
     	url = "github:nix-community/home-manager";
     	inputs.nixpkgs.follows = "nixpkgs";
@@ -29,6 +33,7 @@
           specialArgs = {inherit inputs;};
             modules = [
               ./hosts/lappy/configuration.nix
+              inputs.nixos-hardware.nixosModules.framework-16-7040-amd
           ];
         };
       };
