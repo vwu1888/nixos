@@ -100,7 +100,7 @@
   users.users.vwu = {
     isNormalUser = true;
     description = "vwu";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "uucp" ];
     packages = with pkgs; [
       kdePackages.kate
     #  thunderbird

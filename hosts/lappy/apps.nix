@@ -6,6 +6,8 @@
     vscode
     jetbrains-toolbox
     kicad
+    arduino-ide
+    bambu-studio
     wget
 
     firefox
@@ -17,6 +19,7 @@
     libreoffice
     inkscape
     vlc
+    zoom-us
     _1password-gui
     _1password-cli
     mullvad
