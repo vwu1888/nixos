@@ -11,8 +11,8 @@ pkgs.mkShell {
       ];
     })
 
-    zephyr.hosttools
     zephyr.pythonEnv
+    zephyr.hosttools
 
     pkgs.cmake
     pkgs.ninja
