@@ -8,19 +8,14 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ../../modules/default-apps.nix
+      ../../modules/apps/default-apps.nix
+      ../../modules/home-manager/input-method.nix
       ./apps.nix
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.extraEntries = {
-    "windows.conf" = ''
-      title Windows 11
-      efi /EFI/Microsoft/Boot/bootmgfw.eft
-    '';
-  };
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;

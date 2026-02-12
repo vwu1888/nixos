@@ -19,12 +19,22 @@
        inputs.home-manager.follows = "home-manager";
     };
 
+    zephyr.url = "github:zephyrproject-rtos/zephyr/";
+    zephyr.flake = false;
+
+    zephyr-nix = {
+      url = "github:nix-community/zephyr-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.zephyr.follows = "zephyr";
+    };
+
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: 
+  outputs = { self, nixpkgs, zephyr-nix, ... }@inputs: 
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      zephyr = zephyr-nix.packages.${system};
     in
     {
 
@@ -37,6 +47,13 @@
           ];
         };
       };
+
+      devShells.${system} = {
+        zephyr = import ./modules/apps/zephyr-shell.nix {
+	  inherit pkgs zephyr;
+	};
+      };
+
     };
 
 }
