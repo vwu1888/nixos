@@ -2,15 +2,15 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../../modules/home-manager/input-method.nix
       ../../modules/apps/default-apps.nix
       ../../modules/apps/nix-ld.nix
-      ../../modules/home-manager/input-method.nix
       ./apps.nix
     ];
 
@@ -101,6 +101,14 @@
       kdePackages.kate
     #  thunderbird
     ];
+  };
+  
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "vwu" = import ./home.nix;
+    };
+    backupFileExtension = "backup";
   };
 
   # Install firefox.

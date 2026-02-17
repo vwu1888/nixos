@@ -9,7 +9,7 @@
     };
 
     home-manager = {
-    	url = "github:nix-community/home-manager";
+    	url = "github:nix-community/home-manager/release-25.11";
     	inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -43,6 +43,11 @@
           specialArgs = {inherit inputs;};
             modules = [
               ./hosts/lappy/configuration.nix
+              inputs.home-manager.nixosModules.default {
+                home-manager.sharedModules = [
+                  inputs.plasma-manager.homeModules.plasma-manager
+	        ];
+	      }
               inputs.nixos-hardware.nixosModules.framework-16-7040-amd
           ];
         };

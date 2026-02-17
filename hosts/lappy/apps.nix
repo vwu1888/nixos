@@ -10,6 +10,8 @@
     bambu-studio
     wget
     uv
+    distrobox
+    podman
 
     firefox
     discord
