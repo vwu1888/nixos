@@ -9,6 +9,7 @@
     arduino-ide
     bambu-studio
     wget
+    uv
 
     firefox
     discord

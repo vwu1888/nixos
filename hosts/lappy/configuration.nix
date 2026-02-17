@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/apps/default-apps.nix
+      ../../modules/apps/nix-ld.nix
       ../../modules/home-manager/input-method.nix
       ./apps.nix
     ];
@@ -95,7 +96,7 @@
   users.users.vwu = {
     isNormalUser = true;
     description = "vwu";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "uucp" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "uucp" "podman" ];
     packages = with pkgs; [
       kdePackages.kate
     #  thunderbird
@@ -108,10 +109,14 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  ];
+  virtualisation.containers.enable = true;
+  virtualisation.podman = {
+    enable = true;
+    # Create a "docker" alias so tools looking for docker use podman
+    dockerCompat = true;
+    # Required for containers to find DNS/Internet
+    defaultNetwork.settings.dns_enabled = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
